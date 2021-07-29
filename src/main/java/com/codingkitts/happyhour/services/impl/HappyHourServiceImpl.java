@@ -14,9 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.time.Duration;
 import java.util.*;
 
@@ -123,7 +121,7 @@ public class HappyHourServiceImpl implements HappyHourService {
     }
 
     //Function to read API Key from file.
-    private String getAPIKeyFromFile() throws Exception{
+    private String getAPIKeyFromFile() throws FileNotFoundException, IOException {
         //Open File, Read Key, Close File, Return Key.
         File file = new File(G_API_LOC);
 
