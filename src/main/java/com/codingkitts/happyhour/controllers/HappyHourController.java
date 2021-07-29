@@ -80,3 +80,8 @@ public class HappyHourController {
     //TODO: Incorporate a request to add/remove Happy Hours for Users that search and find no happy hours. This helps
     //      remove a lot of the reliance on my side to populate the DB. 
 }
+
+/*
+    What do I need to do? I need to add in SPring Security still.
+    I need to figure out how to setup a real local DB that persists.
+ */
