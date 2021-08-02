@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +43,7 @@ public class HappyHourController {
     }
 
     @GetMapping("/specials/search")
-    public List<HappyHour> getHappyHoursInRadius(@RequestBody UserInput userInput) {
+    public List<HappyHour> getHappyHoursInRadius(@RequestBody @Valid UserInput userInput) {
         //TODO: For the physicalAddress that comes in from the User, remove leading & trailing whitespace.
         return this.happyHourService.getHappyHoursWithinRadius(userInput.getRadius(), userInput.getPhysicalAddress());
     }
@@ -81,7 +83,6 @@ public class HappyHourController {
     //      remove a lot of the reliance on my side to populate the DB. 
 }
 
-/*
-    What do I need to do? I need to add in SPring Security still.
-    I need to figure out how to setup a real local DB that persists.
- */
+//@Valid will make sure that any constraints you put on @Entity Variables are good. So if you put @NotNull for the
+//name of something. And then you put @Valid on the incoming object. @Valid makes sure there is a name present.
+//@Valid is good for Put & Post requests. Think about what is valid data for the Happy Hour objects.
