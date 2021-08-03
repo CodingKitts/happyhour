@@ -1,6 +1,7 @@
 package com.codingkitts.happyhour.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "happy_hour")
@@ -11,25 +12,63 @@ public class HappyHour {
     private Long happyHourId;
 
     //Variables that hold details about the venue that is putting a happy hour on
+    @NotBlank
+    @Size(max = 50)
     private String venueName;
+
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String venueAddress;
+
+    @NotBlank
+    @Size(min = 10, max = 50)
     private String venueWebsite;
+
+    @NotBlank
+    @Size(max = 240)
     private String venueDescription;
 
     //Variables to hold the lat/long coordinates of the venue street address.
+    @DecimalMax("90.00000")
+    @DecimalMin("-90.00000")
+    @NotNull
     private Double venueLat;
+
+    @DecimalMax("180.00000")
+    @DecimalMin("-180.00000")
+    @NotNull
     private Double venueLng;
 
     //TODO: Think about what to do when a venue has a blanket happy hour for multiple days... This is why having just a
     //      single happy hour being returned based on the current day is a good idea. Because the user won't see that.
 
     //Variables to hold the various specials throughout the week. For the MVP, these will include hours.
+    @NotBlank
+    @Size(min = 10, max = 50)
     private String monSpecial;
+
+    @NotBlank
+    @Size(min = 10, max = 50)
     private String tueSpecial;
+
+    @NotBlank
+    @Size(min = 10, max = 50)
     private String wedSpecial;
+
+    @NotBlank
+    @Size(min = 10, max = 50)
     private String thurSpecial;
+
+    @NotBlank
+    @Size(min = 10, max = 50)
     private String friSpecial;
+
+    @NotBlank
+    @Size(min = 10, max = 50)
     private String satSpecial;
+
+    @NotBlank
+    @Size(min = 10, max = 50)
     private String sunSpecial;
 
     /*//TODO: Incorporate these elements later, post-MVP. They arent necessary.

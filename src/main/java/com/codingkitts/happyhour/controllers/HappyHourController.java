@@ -50,8 +50,12 @@ public class HappyHourController {
 
     //POST Functions
     @PostMapping("/special")
-    public ResponseEntity<HappyHour> createNewHappyHour(@RequestBody HappyHour happyHour) {
+    public ResponseEntity<HappyHour> createNewHappyHour(@RequestBody @Valid HappyHour happyHour) {
         logger.info("Happy Hour: POST New Happy Hour" + happyHour.getVenueName());
+
+        if (happyHour.getHappyHourId()!=null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
         HappyHour hh1 = this.happyHourService.createNewHappyHour(happyHour);
 
@@ -60,7 +64,7 @@ public class HappyHourController {
 
     //PUT Functions
     @PutMapping("/special")
-    public ResponseEntity<HappyHour> editHappyHourById(@RequestBody HappyHour happyHour) {
+    public ResponseEntity<HappyHour> editHappyHourById(@RequestBody @Valid HappyHour happyHour) {
         logger.info("Happy Hour: POST update Happy Hour " + happyHour.getVenueName());
 
         if (this.happyHourService.getHappyHourById(happyHour.getHappyHourId()).isEmpty()) {
@@ -86,3 +90,7 @@ public class HappyHourController {
 //@Valid will make sure that any constraints you put on @Entity Variables are good. So if you put @NotNull for the
 //name of something. And then you put @Valid on the incoming object. @Valid makes sure there is a name present.
 //@Valid is good for Put & Post requests. Think about what is valid data for the Happy Hour objects.
+
+/*
+What I am struggling with right now is what to do with the happyHourID. If I make it @Null then for the PUT I can't
+ */
