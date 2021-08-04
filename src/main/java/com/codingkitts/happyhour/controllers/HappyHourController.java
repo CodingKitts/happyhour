@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,10 +41,22 @@ public class HappyHourController {
         return hh1.map(happyHour -> new ResponseEntity<>(happyHour, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/specials/search")
+    /*@GetMapping("/specials/search")
     public List<HappyHour> getHappyHoursInRadius(@RequestBody @Valid UserInput userInput) {
         //TODO: For the physicalAddress that comes in from the User, remove leading & trailing whitespace.
         return this.happyHourService.getHappyHoursWithinRadius(userInput.getRadius(), userInput.getPhysicalAddress());
+    }*/
+
+    @GetMapping("/specials/search")
+    public ResponseEntity<List<HappyHour>> getHappyHoursInRadius(@RequestBody @Valid UserInput userInput) {
+        List<HappyHour> happyHours = this.happyHourService.getHappyHoursWithinRadius(userInput.getRadius(), userInput.getPhysicalAddress());
+        if (happyHours == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else if (happyHours.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(happyHours, HttpStatus.OK);
+        }
     }
 
     //POST Functions
@@ -84,13 +95,11 @@ public class HappyHourController {
     }
 
     //TODO: Incorporate a request to add/remove Happy Hours for Users that search and find no happy hours. This helps
-    //      remove a lot of the reliance on my side to populate the DB. 
+    //      remove a lot of the reliance on my side to populate the DB.
+
+    //TODO: Create Unit tests for all edge cases of the data validation. DO for both Happy Hour and the UserInput classes
 }
 
 //@Valid will make sure that any constraints you put on @Entity Variables are good. So if you put @NotNull for the
 //name of something. And then you put @Valid on the incoming object. @Valid makes sure there is a name present.
 //@Valid is good for Put & Post requests. Think about what is valid data for the Happy Hour objects.
-
-/*
-What I am struggling with right now is what to do with the happyHourID. If I make it @Null then for the PUT I can't
- */
