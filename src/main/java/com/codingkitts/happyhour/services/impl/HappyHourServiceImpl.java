@@ -69,6 +69,7 @@ public class HappyHourServiceImpl implements HappyHourService {
     //PUT Functions
     @Override
     public HappyHour editHappyHour(HappyHour happyHour) {
+        //TODO: Update this function
         //Make sure the ID exists.
         return this.happyHourRepository.save(happyHour);
     }

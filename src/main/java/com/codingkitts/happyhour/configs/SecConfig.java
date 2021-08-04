@@ -30,6 +30,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/specials/*").permitAll()
+                .antMatchers("/request/create").permitAll()
                 .anyRequest().authenticated();
 
         http.headers().frameOptions().sameOrigin();

@@ -70,9 +70,7 @@ public class HappyHourController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        HappyHour hh1 = this.happyHourService.createNewHappyHour(happyHour);
-
-        return new ResponseEntity<>(hh1, HttpStatus.CREATED);
+        return new ResponseEntity<>(this.happyHourService.createNewHappyHour(happyHour), HttpStatus.CREATED);
     }
 
     //PUT Functions
@@ -100,4 +98,6 @@ public class HappyHourController {
     //      remove a lot of the reliance on my side to populate the DB.
 
     //TODO: Create Unit tests for all edge cases of the data validation. DO for both Happy Hour and the UserInput classes
+
+    //TODO: Create functionality to return specials for a specific day (today) for Happy Hours within radius
 }
