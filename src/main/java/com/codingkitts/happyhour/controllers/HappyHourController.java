@@ -41,12 +41,6 @@ public class HappyHourController {
         return hh1.map(happyHour -> new ResponseEntity<>(happyHour, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /*@GetMapping("/specials/search")
-    public List<HappyHour> getHappyHoursInRadius(@RequestBody @Valid UserInput userInput) {
-        //TODO: For the physicalAddress that comes in from the User, remove leading & trailing whitespace.
-        return this.happyHourService.getHappyHoursWithinRadius(userInput.getRadius(), userInput.getPhysicalAddress());
-    }*/
-
     @GetMapping("/specials/search")
     public ResponseEntity<List<HappyHour>> getHappyHoursInRadius(@RequestBody @Valid UserInput userInput) {
         logger.info("Happy Hour: Get Happy Hours in Radius");
@@ -93,9 +87,6 @@ public class HappyHourController {
         return new ResponseEntity<>(this.happyHourService.deleteHappyHourById(happyHourId));
 
     }
-
-    //TODO: Incorporate a request to add/remove Happy Hours for Users that search and find no happy hours. This helps
-    //      remove a lot of the reliance on my side to populate the DB.
 
     //TODO: Create Unit tests for all edge cases of the data validation. DO for both Happy Hour and the UserInput classes
 

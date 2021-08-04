@@ -39,9 +39,6 @@ public class HappyHour {
     @NotNull
     private Double venueLng;
 
-    //TODO: Think about what to do when a venue has a blanket happy hour for multiple days... This is why having just a
-    //      single happy hour being returned based on the current day is a good idea. Because the user won't see that.
-
     //Variables to hold the various specials throughout the week. For the MVP, these will include hours.
     @NotBlank
     @Size(min = 10, max = 50)

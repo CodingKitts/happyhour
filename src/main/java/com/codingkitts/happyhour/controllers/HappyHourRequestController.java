@@ -22,6 +22,8 @@ public class HappyHourRequestController {
         this.happyHourRequestService = happyHourRequestService;
     }
 
+    //TODO: Create tests for data validation edge cases.
+
     @GetMapping("/requests")
     public List<HappyHourRequest> getAllHappyHourRequests() {
         return this.happyHourRequestService.getAllHappyHourRequests();

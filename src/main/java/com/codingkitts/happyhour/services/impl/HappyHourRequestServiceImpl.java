@@ -46,7 +46,6 @@ public class HappyHourRequestServiceImpl implements HappyHourRequestService {
         return this.happyHourRequestRepository.save(happyHourRequest);
     }
 
-    //The question is do we care about the whole object being returned when updating if its been read? No..
     @Override
     public HttpStatus setHappyHourRequestAsRead(Long happyHourRequestId) {
         if (this.happyHourRequestRepository.findById(happyHourRequestId).isEmpty()) {

@@ -2,7 +2,6 @@ package com.codingkitts.happyhour.services.impl;
 
 import com.codingkitts.happyhour.entities.HappyHour;
 import com.codingkitts.happyhour.models.geocode.GeocodeLocation;
-import com.codingkitts.happyhour.models.geocode.GeocodeObject;
 import com.codingkitts.happyhour.models.geocode.GeocodeResult;
 import com.codingkitts.happyhour.repos.HappyHourRepository;
 import com.codingkitts.happyhour.services.HappyHourService;
@@ -21,7 +20,6 @@ import java.util.*;
 @Service
 public class HappyHourServiceImpl implements HappyHourService {
     //TODO: At some point create an API vault in some cloud to leverage.
-    //TODO: Enable Security as well.
 
     private static final Logger logger = LoggerFactory.getLogger(HappyHourServiceImpl.class);
     private static final String G_API_LOC = "C:\\Users\\Harrison\\Desktop\\gapi-hh.txt";
