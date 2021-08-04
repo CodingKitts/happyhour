@@ -49,6 +49,8 @@ public class HappyHourController {
 
     @GetMapping("/specials/search")
     public ResponseEntity<List<HappyHour>> getHappyHoursInRadius(@RequestBody @Valid UserInput userInput) {
+        logger.info("Happy Hour: Get Happy Hours in Radius");
+
         List<HappyHour> happyHours = this.happyHourService.getHappyHoursWithinRadius(userInput.getRadius(), userInput.getPhysicalAddress());
         if (happyHours == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
