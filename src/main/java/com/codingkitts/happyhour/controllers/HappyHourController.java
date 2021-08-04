@@ -99,7 +99,3 @@ public class HappyHourController {
 
     //TODO: Create Unit tests for all edge cases of the data validation. DO for both Happy Hour and the UserInput classes
 }
-
-//@Valid will make sure that any constraints you put on @Entity Variables are good. So if you put @NotNull for the
-//name of something. And then you put @Valid on the incoming object. @Valid makes sure there is a name present.
-//@Valid is good for Put & Post requests. Think about what is valid data for the Happy Hour objects.
