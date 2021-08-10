@@ -41,31 +41,31 @@ public class HappyHour {
 
     //Variables to hold the various specials throughout the week. For the MVP, these will include hours.
     @NotBlank
-    @Size(min = 10, max = 50)
+    @Size(min = 5, max = 50)
     private String monSpecial;
 
     @NotBlank
-    @Size(min = 10, max = 50)
+    @Size(min = 5, max = 50)
     private String tueSpecial;
 
     @NotBlank
-    @Size(min = 10, max = 50)
+    @Size(min = 5, max = 50)
     private String wedSpecial;
 
     @NotBlank
-    @Size(min = 10, max = 50)
+    @Size(min = 5, max = 50)
     private String thurSpecial;
 
     @NotBlank
-    @Size(min = 10, max = 50)
+    @Size(min = 5, max = 50)
     private String friSpecial;
 
-    @NotBlank
-    @Size(min = 10, max = 50)
+    @NotNull
+    @Size(min = 5, max = 50)
     private String satSpecial;
 
-    @NotBlank
-    @Size(min = 10, max = 50)
+    @NotNull
+    @Size(min = 5, max = 50)
     private String sunSpecial;
 
     /*//TODO: Incorporate these elements later, post-MVP. They arent necessary.
