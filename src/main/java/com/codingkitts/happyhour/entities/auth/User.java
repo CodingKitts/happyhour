@@ -9,14 +9,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userId;
 
+    //TODO: Brainstorm what valid credentials look like (Obviously the validation would happen client side)
     private String username;
     private String password;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Authority> authorities;
 
-    public User() {
-    }
+    public User() {}
 
     public String getUserId() {
         return userId;

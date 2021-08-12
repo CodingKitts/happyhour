@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,24 +42,34 @@ public class HappyHourController {
     }
 
     @GetMapping("/specials/search")
-    public List<HappyHour> getHappyHoursInRadius(@RequestBody UserInput userInput) {
-        //TODO: For the physicalAddress that comes in from the User, remove leading & trailing whitespace.
-        return this.happyHourService.getHappyHoursWithinRadius(userInput.getRadius(), userInput.getPhysicalAddress());
+    public ResponseEntity<List<HappyHour>> getHappyHoursInRadius(@RequestBody @Valid UserInput userInput) {
+        logger.info("Happy Hour: Get Happy Hours in Radius");
+
+        List<HappyHour> happyHours = this.happyHourService.getHappyHoursWithinRadius(userInput.getRadius(), userInput.getPhysicalAddress());
+        if (happyHours == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else if (happyHours.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(happyHours, HttpStatus.OK);
+        }
     }
 
     //POST Functions
     @PostMapping("/special")
-    public ResponseEntity<HappyHour> createNewHappyHour(@RequestBody HappyHour happyHour) {
+    public ResponseEntity<HappyHour> createNewHappyHour(@RequestBody @Valid HappyHour happyHour) {
         logger.info("Happy Hour: POST New Happy Hour" + happyHour.getVenueName());
 
-        HappyHour hh1 = this.happyHourService.createNewHappyHour(happyHour);
+        if (happyHour.getHappyHourId()!=null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
-        return new ResponseEntity<>(hh1, HttpStatus.CREATED);
+        return new ResponseEntity<>(this.happyHourService.createNewHappyHour(happyHour), HttpStatus.CREATED);
     }
 
     //PUT Functions
     @PutMapping("/special")
-    public ResponseEntity<HappyHour> editHappyHourById(@RequestBody HappyHour happyHour) {
+    public ResponseEntity<HappyHour> editHappyHourById(@RequestBody @Valid HappyHour happyHour) {
         logger.info("Happy Hour: POST update Happy Hour " + happyHour.getVenueName());
 
         if (this.happyHourService.getHappyHourById(happyHour.getHappyHourId()).isEmpty()) {
@@ -77,11 +88,7 @@ public class HappyHourController {
 
     }
 
-    //TODO: Incorporate a request to add/remove Happy Hours for Users that search and find no happy hours. This helps
-    //      remove a lot of the reliance on my side to populate the DB. 
-}
+    //TODO: Create Unit tests for all edge cases of the data validation. DO for both Happy Hour and the UserInput classes
 
-/*
-    What do I need to do? I need to add in SPring Security still.
-    I need to figure out how to setup a real local DB that persists.
- */
+    //TODO: Create functionality to return specials for a specific day (today) for Happy Hours within radius
+}

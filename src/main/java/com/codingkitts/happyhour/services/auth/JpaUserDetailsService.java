@@ -3,7 +3,6 @@ package com.codingkitts.happyhour.services.auth;
 import com.codingkitts.happyhour.entities.auth.User;
 import com.codingkitts.happyhour.models.security.CustomUserDetails;
 import com.codingkitts.happyhour.repos.UserRepository;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

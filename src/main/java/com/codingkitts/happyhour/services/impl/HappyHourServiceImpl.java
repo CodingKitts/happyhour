@@ -2,7 +2,6 @@ package com.codingkitts.happyhour.services.impl;
 
 import com.codingkitts.happyhour.entities.HappyHour;
 import com.codingkitts.happyhour.models.geocode.GeocodeLocation;
-import com.codingkitts.happyhour.models.geocode.GeocodeObject;
 import com.codingkitts.happyhour.models.geocode.GeocodeResult;
 import com.codingkitts.happyhour.repos.HappyHourRepository;
 import com.codingkitts.happyhour.services.HappyHourService;
@@ -21,7 +20,6 @@ import java.util.*;
 @Service
 public class HappyHourServiceImpl implements HappyHourService {
     //TODO: At some point create an API vault in some cloud to leverage.
-    //TODO: Enable Security as well.
 
     private static final Logger logger = LoggerFactory.getLogger(HappyHourServiceImpl.class);
     private static final String G_API_LOC = "C:\\Users\\Harrison\\Desktop\\gapi-hh.txt";
@@ -69,6 +67,7 @@ public class HappyHourServiceImpl implements HappyHourService {
     //PUT Functions
     @Override
     public HappyHour editHappyHour(HappyHour happyHour) {
+        //TODO: Update this function
         //Make sure the ID exists.
         return this.happyHourRepository.save(happyHour);
     }
@@ -120,6 +119,7 @@ public class HappyHourServiceImpl implements HappyHourService {
         return latLng;
     }
 
+    //TODO: Think about what to do when the API can't be read from the source. This is happening now technically.
     //Function to read API Key from file.
     private String getAPIKeyFromFile() throws FileNotFoundException, IOException {
         //Open File, Read Key, Close File, Return Key.
@@ -128,5 +128,10 @@ public class HappyHourServiceImpl implements HappyHourService {
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         return br.readLine();
+
+        /*
+            What do I do when the API Key can't be retrieved? Should I have a backup key? Do I need to think about
+            what the fallback plan is? Should I store it in multiple places?
+         */
     }
 }
